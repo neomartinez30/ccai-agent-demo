@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: "GenAI Financial Services Agent powered by Amazon Bedrock, Amazon DynamoDB, AWS Lambda, Amazon Lex, and Amazon Kendra"
+Description: "GenAI Agent powered by Amazon Bedrock, Amazon DynamoDB, AWS Lambda, Amazon Lex, and Amazon Kendra"
 Metadata:
   LICENSE: >-
     Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
@@ -221,7 +221,7 @@ Resources:
   AgentHandlerFunction:
     Type: AWS::Lambda::Function
     Properties:
-      Description: Lambda handler for GenAI FSI Agent.
+      Description: Lambda handler for Langchaing Agent.
       FunctionName: !Sub ${AWS::StackName}-GenAILexHandler
       Code:
         S3Bucket: !Ref S3ArtifactBucket
@@ -470,13 +470,13 @@ Resources:
     DependsOn: LexBotRole
     Type: AWS::Lex::Bot
     Properties:
-        Name: !Sub ${AWS::StackName}-FSI-Agent
+        Name: !Sub ${AWS::StackName}-LangChain-Agent
         BotFileS3Location: 
           S3Bucket: !Ref S3ArtifactBucket
           S3ObjectKey: !Ref LexBotS3Key
         DataPrivacy: 
           ChildDirected: false
-        Description: 'Financial Services Agent'
+        Description: 'Covered California Agent'
         IdleSessionTTLInSeconds: 900
         RoleArn: !GetAtt LexBotRole.Arn
 
